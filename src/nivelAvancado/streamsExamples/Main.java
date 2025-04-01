@@ -1,5 +1,7 @@
 package nivelAvancado.streamsExamples;
 
+import desafios.desafio6.Ninjas;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +30,28 @@ public class Main {
                 .forEach(System.out::println);
 
         System.out.println("============= FILTER BY NAME =============");
-        ninjas.stream().sorted((n1, n2) -> String.copyValueOf(n1.getNome(), n2.getNome()))
+        ninjas.stream().sorted((n1, n2) -> n1.getNome().compareTo(n2.getNome()))
                 .forEach(System.out::println);
+
+        // MAP
+//        ninjas.stream()
+//                .map(ninja -> ninja.getNome())
+//                .forEach(System.out::println);
+
+
+        System.out.println("============= FILTER ONLY NAMES =============");
+
+        ninjas.stream()
+                .map(Ninja::getNome)
+                .forEach(System.out::println);
+
+        // MAX
+        System.out.println("============= FINDING HIGH NUMBER OF THE LIST =============");
+
+        Ninja olderNinja = ninjas.stream()
+                .max((n1, n2) -> Integer.compare(n1.getIdade(), n2.getIdade()))
+                .orElse(null);
+
+        System.out.println("olderNinja = " + olderNinja);
     }
 }
